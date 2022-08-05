@@ -1,10 +1,25 @@
 package admin
 
 import (
+	"context"
+
 	"github.com/tsuna/gohbase/hrpc"
+	"github.com/tsuna/gohbase/pb"
 )
 
 type Client interface {
+	// set values
+	//table
+	Context(context.Context) Client
+	Table(string) Client
+	Families(map[string]map[string]string) Client
+	SplitKeys([][]byte)
+	//snapshot
+	SnapshotName(string) Client
+	SnapshotType(*pb.SnapshotDescription_Type) Client
+	SnapshotVersion(int32) Client
+	SnapshotOwner(string) Client
+
 	// operations
 
 	CreateTable(t *hrpc.CreateTable) Result

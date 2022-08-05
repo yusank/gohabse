@@ -271,7 +271,7 @@ func (c *client) Close() {
 func NewClient(opts ...Option) Client {
 	o := newOption()
 	o.apply(opts...)
-	hClient := gohbase.NewClient(o.addr /*more options*/)
+	hClient := gohbase.NewClient(o.addr, o.gohbaseOpts...)
 
 	return &client{
 		cli:   hClient,
