@@ -2,32 +2,37 @@ package admin
 
 import (
 	"context"
-
-	"github.com/tsuna/gohbase/pb"
 )
 
 type Client interface {
-	// set values
-	//table
+	/*
+	 *  tables
+	 */
 	Context(context.Context) Client
 	Table(string) Client
 	Families(map[string]map[string]string) Client
-	SplitKeys([][]byte)
-	//snapshot
+	SplitKeys([][]byte) Client
+	/*
+	 * snapshot
+	 */
 	SnapshotName(string) Client
-	SnapshotType(*pb.SnapshotDescription_Type) Client
+	SnapshotSkipFlush() Client
 	SnapshotVersion(int32) Client
 	SnapshotOwner(string) Client
-	// list
+	/*
+	 * list
+	 */
 	Regex(string) Client
 	IncludeSysTables(bool) Client
 	Namespace(string) Client
-	// move region
+	/*
+	 * move region
+	 */
 	TargetRegion(string) Client
 	TargetServerName(string) Client
-
-	// operations
-
+	/*
+	* other operations
+	 */
 	CreateTable() Result
 	DeleteTable() Result
 	EnableTable() Result

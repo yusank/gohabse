@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/yusank/gohbase"
+	gohbaseadmin "github.com/yusank/gohbase/admin"
 )
 
 func main() {
@@ -19,5 +20,14 @@ func main() {
 	result := cli.Context(context.Background()).Table("test").Key("rowKey").Values(values).Put()
 	if result.Err() != nil {
 		panic(result.Err())
+	}
+}
+
+func admin() {
+	cli := gohbaseadmin.NewClient(gohbaseadmin.Addr("127.0.0.1"))
+
+	r := cli.Context(context.Background()).Table("test").CreateTable()
+	if r.Err() != nil {
+		panic(r.Err())
 	}
 }
