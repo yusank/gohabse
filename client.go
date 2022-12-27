@@ -7,8 +7,9 @@ import (
 )
 
 type Client interface {
-	// set values
-
+	/*
+	* set values
+	 */
 	Context(context.Context) Client
 	Table(table string) Client
 	Key(key string) Client
@@ -19,9 +20,9 @@ type Client interface {
 	Values(values map[string]map[string][]byte) Client
 	ExpectedValue(expectedValue []byte) Client
 	Options(opts ...func(hrpc.Call) error) Client
-
-	// operations
-
+	/*
+	*operations
+	 */
 	Scan() Result
 	Get() Result
 	Put() Result

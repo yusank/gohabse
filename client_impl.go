@@ -113,7 +113,7 @@ func (c *client) Scan() Result {
 	}
 
 	return &result{
-		scanner: c.cli.Scan(scan),
+		scanner: tx.cli.Scan(scan),
 	}
 }
 
@@ -133,7 +133,7 @@ func (c *client) Get() Result {
 	}
 
 	r := &result{}
-	r.result, r.err = c.cli.Get(get)
+	r.result, r.err = tx.cli.Get(get)
 
 	return r
 }
@@ -154,7 +154,7 @@ func (c *client) Put() Result {
 	}
 
 	r := &result{}
-	r.result, r.err = c.cli.Put(put)
+	r.result, r.err = tx.cli.Put(put)
 
 	return r
 }
@@ -175,7 +175,7 @@ func (c *client) Delete() Result {
 	}
 
 	r := &result{}
-	r.result, r.err = c.cli.Delete(del)
+	r.result, r.err = tx.cli.Delete(del)
 
 	return r
 }
@@ -196,7 +196,7 @@ func (c *client) Append() Result {
 	}
 
 	r := &result{}
-	r.result, r.err = c.cli.Append(app)
+	r.result, r.err = tx.cli.Append(app)
 
 	return r
 }
@@ -226,7 +226,7 @@ func (c *client) Increment() Result {
 	}
 
 	r := &result{}
-	r.i64, r.err = c.cli.Increment(inc)
+	r.i64, r.err = tx.cli.Increment(inc)
 
 	return r
 }
@@ -247,7 +247,7 @@ func (c *client) CheckAndPut() Result {
 	}
 
 	r := &result{}
-	r.b, r.err = c.cli.CheckAndPut(put, *tx.family, *tx.qualifier, tx.expectedValue)
+	r.b, r.err = tx.cli.CheckAndPut(put, *tx.family, *tx.qualifier, tx.expectedValue)
 
 	return r
 }
